@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Mis Notas</h2>
+    <a href="{{ url_for('notepad.create') }}" class="btn btn-primary mb-3">Nueva Nota</a>
+    <div class="list-group">
+        {% for note in notepads %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>{{ note.title }}</h5>
+                    <p>{{ note.body }}</p>
+                </div>
+                <form action="{{ url_for('notepad.delete', notepad_id=note.id) }}" method="POST">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </div>
+        {% else %}
+            <p>No tienes notas registradas.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
